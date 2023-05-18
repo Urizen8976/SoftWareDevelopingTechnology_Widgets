@@ -39,10 +39,45 @@ Widget::Widget()
 
 void Widget::begin()
 {
+        inputEdit->clear();
+        nextButton->setEnabled(false);
+        nextButton->setDefault(false);
+        inputEdit->setEnabled(true);
+        outputLabel->setVisible(false);
+        outputEdit->setVisible(false);
+        outputEdit->setEnabled(false);
+        inputEdit->setFocus();
 }
 
 void Widget::calc()
 {
+        bool Ok=true; float r,a;
+        QString str=inputEdit->text();
+        a=str.toDouble(&Ok);// function which trying convert str to double and if it failed, then change OK to false
+        if (Ok)//if conversion is success then squareing entered number
+        {
+            r=a*a;
+            str.setNum(r);// put new value into str
+            outputEdit->setText(str);//set new value into outputEdit
+            inputEdit->setEnabled(false);//forbid change inputEdit
+            outputLabel->setVisible(true);//show outputLabel
+            outputEdit->setVisible(true);//show outputEdit with result
+            nextButton->setDefault(true);
+            nextButton->setEnabled(true);
+            nextButton->setFocus();
+        }
+        else
+        {
+            if (!str.isEmpty())
+            {
+                QMessageBox msgBox(QMessageBox::Information,// shows msg about wrong wrote number
+                                   codec->toUnicode("Возведение в квадрат."),
+                                   codec->toUnicode("Введено неверное значение."),
+                                   QMessageBox::Ok);
+                msgBox.exec();
+                inputEdit->setText("");//clear inputEdit
+            }
+        }
 }
 
 

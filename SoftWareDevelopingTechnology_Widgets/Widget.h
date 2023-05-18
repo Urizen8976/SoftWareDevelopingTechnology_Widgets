@@ -12,6 +12,7 @@
 #include <QVBoxLayout>
 #include <QMessageBox>
 
+
 class Widget : public QWidget //  Класс окна
 {
     Q_OBJECT
