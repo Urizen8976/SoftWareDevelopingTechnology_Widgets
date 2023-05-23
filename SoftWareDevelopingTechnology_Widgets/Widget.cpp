@@ -38,7 +38,6 @@ Widget::Widget(QWidget * parent):
     connect(nextButton, SIGNAL(clicked(bool)), this, SLOT(begin()));
     connect(inputEdit,  SIGNAL(returnPressed()),this, SLOT(calc()));
 }
-//                                 QWidget {parent}
 
 
 void Widget::begin()
