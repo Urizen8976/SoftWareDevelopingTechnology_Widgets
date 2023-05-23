@@ -2,39 +2,40 @@
 #define WIDGET_H
 
 
-#include <QWidget>
-#include <QLabel>
-#include <QFrame>
-#include <QLineEdit>
-#include <QPushButton>
-#include <QtCore5Compat/QTextCodec>
-#include <QValidator>
-#include <QVBoxLayout>
-#include <QMessageBox>
+#include <QtWidgets>            //  Подключение модуля классов для расширения Qt GUI виджетами C++.
 
 
-class Widget : public QWidget //  Класс окна
+class Widget : public QWidget
 {
     Q_OBJECT
 
-public:
-    Widget();
+    QFrame *frame;                  //  Базовый класс виджетов, которые могут иметь рамку (для рамки)
+    QLabel *inputLabel;             //  Отображение текста или изображения (для метки ввода)
+    QLineEdit *inputEdit;           //  Однострочный текстовый редактор (для строчного редактора ввода)
+    QLabel *outputLabel;            //  Отображение текста или изображения (для метки вывода)
+    QLineEdit *outputEdit;          //  Однострочный текстовый редактор (для строчного редактора вывода)
+    QPushButton *nextButton;        //  Кнопка управления (для кнопки "Следующее")
+    QPushButton *exitButton;        //  Кнопка управления (для кнопки "Выход")
 
-protected:
-    QTextCodec *codec;
-    QFrame *frame; // рамка
-    QLabel *inputLabel; // метка ввода
-    QLineEdit *inputEdit; // строчный редактор ввода
-    QLabel *outputLabel; // метка вывода
-    QLineEdit *outputEdit; // строчный редактор вывода
-    QPushButton *nextButton; // кнопка Следующее
-    QPushButton *exitButton; // кнопка Выход
-    QPushButton *calculate;
+public:
+    explicit Widget(QWidget *parent);        //  Конструктор с непустым родителем
+    explicit Widget(): Widget {nullptr} {}   //  Конструктор без родителя
 
 public slots:
-    void begin(); // Метод начальной настройки интерфейса
-    void calc(); // Метод реализации вычислений
+    void begin();                   //  Метод начальной настройки интерфейса
+    void calc();                    //  Метод реализации вычислений
 };
+
+
+//class StrValidator:public QValidator // Класс компонента проверки ввода
+//{
+//public:
+//    StrValidator(QObject *parent):QValidator(parent){}
+//    virtual State validate(QString &str,int &pos)const
+//    {
+//        return Acceptable; // Метод всегда принимает вводимую строку
+//    }
+//};
 
 
 #endif // WIDGET_H
