@@ -38,8 +38,8 @@ protected:
     QPushButton * exitButton;
 
 public:
-    Widget(QWidget * parent);
-
+    explicit Widget(QWidget * parent);
+    explicit Widget(): Widget {nullptr} {}
 };
 
 
